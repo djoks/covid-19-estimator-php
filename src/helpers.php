@@ -213,7 +213,7 @@ function logRequest()
     $formatter = new LineFormatter($output, $dateFormat);
 
     // Create a handler
-    $stream = new StreamHandler("../logs/estimator.log", Logger::DEBUG);
+    $stream = new StreamHandler("logs/estimator.log", Logger::DEBUG);
     $stream->setFormatter($formatter);
 
     $log = new Logger("Estimator");
