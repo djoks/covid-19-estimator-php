@@ -1,6 +1,6 @@
 <?php
 
-require "../vendor/autoload.php";
+require "vendor/autoload.php";
 require "objects.php";
 
 use Carbon\Carbon;
