@@ -69,7 +69,6 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -104,3 +103,5 @@ dist
 .tern-port
 vendor/
 .github/workflows/devc-support.code-workspace
+
+LocalValetDriver.php

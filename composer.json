@@ -3,6 +3,16 @@
         "phpunit/phpunit": "^9.1"
     },
     "require": {
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "nesbot/carbon": "^2.32",
+        "pecee/simple-router": "4.2.0.6",
+        "vlucas/phpdotenv": "^4.1",
+        "monolog/monolog": "^2.0",
+        "spatie/array-to-xml": "^2.11"
+    },
+    "config": {
+        "platform": {
+            "php": "7.3"
+        }
     }
 }
