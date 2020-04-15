@@ -21,7 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    if (!headers_sent()) header('X-PHP-Response-Code: 422', true, 422);
+    http_response_code(400);
     return response()->json([
       "errors" => $errors
     ]);
