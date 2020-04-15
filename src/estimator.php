@@ -54,8 +54,6 @@ function covid19ImpactEstimator($data)
   $severeImpact->casesForVentilatorsByRequestedTime = intval($severeImpact->infectionsByRequestedTime * PERCENTAGE_REQUIRE_VENTILATORS);
   $severeImpact->dollarsInFlight = intval(($severeImpact->infectionsByRequestedTime * $data["region"]["avgDailyIncomePopulation"] * $data["region"]["avgDailyIncomeInUSD"]) / $daysBetween);
 
-  logRequest();
-
   $data = new Data($data);
 
   if (stripos(request()->getUrl(), "/xml") !== false) {
