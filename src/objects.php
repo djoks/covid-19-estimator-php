@@ -16,12 +16,12 @@ class Data
 
     function __construct($data)
     {
-        $this->region = new Region($data->region);
-        $this->periodType = $data->periodType;
-        $this->timeToElapse = $data->timeToElapse;
-        $this->reportedCases = $data->reportedCases;
-        $this->population = $data->population;
-        $this->totalHospitalBeds = $data->totalHospitalBeds;
+        $this->region = new Region($data["region"]);
+        $this->periodType = $data["periodType"];
+        $this->timeToElapse = $data["timeToElapse"];
+        $this->reportedCases = $data["reportedCases"];
+        $this->population = $data["population"];
+        $this->totalHospitalBeds = $data["totalHospitalBeds"];
     }
 
     function toArray()
@@ -84,13 +84,13 @@ class Region
 
     function __construct($region)
     {
-        $this->name = $region->name;
+        $this->name = $region["name"];
 
-        $this->avgAge = $region->avgAge;
+        $this->avgAge = $region["avgAge"];
 
-        $this->avgDailyIncomeInUSD = $region->avgDailyIncomeInUSD;
+        $this->avgDailyIncomeInUSD = $region["avgDailyIncomeInUSD"];
 
-        $this->avgDailyIncomePopulation = $region->avgDailyIncomePopulation;
+        $this->avgDailyIncomePopulation = $region["avgDailyIncomePopulation"];
     }
 
     function toArray()
