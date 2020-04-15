@@ -18,11 +18,11 @@ define("PERCENTAGE_REQUIRE_VENTILATORS", (2 / 100));
 
 function covid19ImpactEstimator($data)
 {
-  $errors = validate($data);
+  /*$errors = validate($data);
 
   if (!empty($errors)) {
     return [$errors];
-  }
+  }*/
 
   $currentDate = Carbon::now();
   $endDate = Carbon::parse($data->timeToElapse . " " . $data->periodType);
