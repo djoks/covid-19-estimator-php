@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 require "vendor/autoload.php";
 require "src/helpers.php";
@@ -68,3 +69,5 @@ function covid19ImpactEstimator($data)
     ]);
   }
 }
+
+ob_end_flush();

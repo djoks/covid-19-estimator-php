@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 require "estimator.php";
 
@@ -21,3 +22,5 @@ Router::all("", function () {
     if (!headers_sent()) header('X-PHP-Response-Code: 404', true, 404);
     return response()->json(["message" => "Route / method not found."]);
 })->setMatch("//is");
+
+ob_end_flush();
