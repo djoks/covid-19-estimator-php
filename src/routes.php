@@ -27,6 +27,11 @@ Router::get("/api/v1/on-covid-19/logs", function () {
     return file_get_contents(__DIR__ . "/../logs/estimator.log");
 });
 
+Router::get("/logs", function () {
+    header('Content-Type: text/plain');
+    return file_get_contents(__DIR__ . "/../logs/estimator.log");
+});
+
 Router::all("", function () {
     http_response_code(404);
     return json_encode(["message" => "Route / method not found."]);
