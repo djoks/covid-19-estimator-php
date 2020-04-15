@@ -1,7 +1,7 @@
 <?php
 
 require "vendor/autoload.php";
-require_once "src/helpers.php";
+require "src/helpers.php";
 require "objects.php";
 
 use Carbon\Carbon;
@@ -21,7 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    header('X-PHP-Response-Code: 422', true, 422);
+    if (!headers_sent()) header('X-PHP-Response-Code: 422', true, 422);
     return response()->json([
       "errors" => $errors
     ]);
@@ -54,7 +54,7 @@ function covid19ImpactEstimator($data)
 
   if (stripos(request()->getUrl(), "/xml") !== false) {
     $data = new Data($data);
-    header('Content-Type:application/xml');
+    if (!headers_sent()) header('Content-Type:application/xml');
     return ArrayToXml::convert([
       "data" => $data->toArray(),
       "impact" => $impact->toArray(),

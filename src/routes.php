@@ -13,11 +13,11 @@ Router::post("/api/v1/on-covid-19/xml", function () {
 });
 
 Router::get("/api/v1/on-covid-19/logs", function () {
-    header('Content-Type:text/plain');
+    if (!headers_sent()) header('Content-Type:text/plain');
     return file_get_contents(__DIR__ . "/../logs/estimator.log");
 });
 
 Router::all("", function () {
-    header('X-PHP-Response-Code: 404', true, 404);
+    if (!headers_sent()) header('X-PHP-Response-Code: 404', true, 404);
     return response()->json(["message" => "Route / method not found."]);
 })->setMatch("//is");
