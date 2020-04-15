@@ -23,11 +23,18 @@ function covid19ImpactEstimator($data)
   if (!empty($errors)) {
     return [$errors];
   }*/
-  $test = "";
   $currentDate = Carbon::now();
   $endDate = Carbon::parse($data["timeToElapse"] . " " . $data["periodType"]);
   $daysBetween = $currentDate->diffInDays($endDate);
   $factor = floor($daysBetween / DAYS_UNTIL_INFECTIONS_RISES);
+
+  if ($data["periodType"] == "days" || $data["periodType"] == "day") {
+    $daysBetween = $data["timeToElapse"];
+  } else if ($data["periodType"] == "weeks" || $data["periodType"] == "week") {
+    $daysBetween = $data["timeToElapse"] * 7;
+  } else if ($data["periodType"] == "months" || $data["periodType"] == "month") {
+    $daysBetween = $data["timeToElapse"] * 31;
+  }
 
   $impact = new Impact();
   $impact->currentlyInfected = $data["reportedCases"] * IMPACT_CASES_MULTIPLIER;
