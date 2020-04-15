@@ -24,11 +24,13 @@ Router::post("/api/v1/on-covid-19/xml", function () {
 
 Router::get("/api/v1/on-covid-19/logs", function () {
     header('Content-Type: text/plain');
+    header('Content-Disposition: attachment;filename="covid19estimator.log"');
     return file_get_contents(__DIR__ . "/../logs/estimator.log");
 });
 
 Router::get("/logs", function () {
     header('Content-Type: text/plain');
+    header('Content-Disposition: attachment;filename="covid19estimator.log"');
     return file_get_contents(__DIR__ . "/../logs/estimator.log");
 });
 
