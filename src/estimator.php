@@ -23,11 +23,18 @@ function covid19ImpactEstimator($data)
   if (!empty($errors)) {
     return [$errors];
   }*/
-
   $currentDate = Carbon::now();
   $endDate = Carbon::parse($data["timeToElapse"] . " " . $data["periodType"]);
   $daysBetween = $currentDate->diffInDays($endDate);
   $factor = floor($daysBetween / DAYS_UNTIL_INFECTIONS_RISES);
+
+  if ($data["periodType"] == "days" || $data["periodType"] == "day") {
+    $daysBetween = $data["timeToElapse"];
+  } else if ($data["periodType"] == "weeks" || $data["periodType"] == "week") {
+    $daysBetween = $data["timeToElapse"] * 7;
+  } else if ($data["periodType"] == "months" || $data["periodType"] == "month") {
+    $daysBetween = $data["timeToElapse"] * 30;
+  }
 
   $impact = new Impact();
   $impact->currentlyInfected = $data["reportedCases"] * IMPACT_CASES_MULTIPLIER;
@@ -36,7 +43,7 @@ function covid19ImpactEstimator($data)
   $impact->hospitalBedsByRequestedTime = intval(($data["totalHospitalBeds"] * PERCENTAGE_HOSPITAL_BED_AVAILABLITY) - $impact->severeCasesByRequestedTime);
   $impact->casesForICUByRequestedTime = intval($impact->infectionsByRequestedTime * PERCENTAGE_REQUIRE_ICU_CARE);
   $impact->casesForVentilatorsByRequestedTime = intval($impact->infectionsByRequestedTime * PERCENTAGE_REQUIRE_VENTILATORS);
-  $impact->dollarsInFlight = ($impact->infectionsByRequestedTime * $data["region"]["avgDailyIncomePopulation"]) * $data["region"]["avgDailyIncomeInUSD"] / $daysBetween;
+  $impact->dollarsInFlight = intval(($impact->infectionsByRequestedTime * $data["region"]["avgDailyIncomePopulation"] * $data["region"]["avgDailyIncomeInUSD"]) / $daysBetween);
 
   $severeImpact = new Impact();
   $severeImpact->currentlyInfected = $data["reportedCases"] * SEVERE_IMPACT_CASES_MULTIPLIER;
@@ -45,7 +52,7 @@ function covid19ImpactEstimator($data)
   $severeImpact->hospitalBedsByRequestedTime = intval(($data["totalHospitalBeds"] * PERCENTAGE_HOSPITAL_BED_AVAILABLITY) - $severeImpact->severeCasesByRequestedTime);
   $severeImpact->casesForICUByRequestedTime = intval($severeImpact->infectionsByRequestedTime * PERCENTAGE_REQUIRE_ICU_CARE);
   $severeImpact->casesForVentilatorsByRequestedTime = intval($severeImpact->infectionsByRequestedTime * PERCENTAGE_REQUIRE_VENTILATORS);
-  $severeImpact->dollarsInFlight = ($severeImpact->infectionsByRequestedTime * $data["region"]["avgDailyIncomePopulation"]) * $data["region"]["avgDailyIncomeInUSD"] / $daysBetween;
+  $severeImpact->dollarsInFlight = intval(($severeImpact->infectionsByRequestedTime * $data["region"]["avgDailyIncomePopulation"] * $data["region"]["avgDailyIncomeInUSD"]) / $daysBetween);
 
   logRequest();
 
