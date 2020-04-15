@@ -219,5 +219,5 @@ function logRequest()
     $log = new Logger("Estimator");
     $log->pushHandler($stream);
 
-    $log->info(Carbon::now()->timestamp . "\t\t" . request()->getUrl() . "\t\tDone in " . number_format(microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"], 2) . " seconds\n\n");
+    $log->info(strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000000) . "ms\n\n");
 }
