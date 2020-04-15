@@ -13,10 +13,10 @@ Router::post("/api/v1/on-covid-19/xml", function () {
 });
 
 Router::get("/api/v1/on-covid-19/logs", function () {
-    if (!headers_sent()) header('Content-Type:text/plain');
+    if (!headers_sent()) @header('Content-Type:text/plain');
     return file_get_contents(__DIR__ . "/../logs/estimator.log");
 });
 
 Router::all("", function () {
-    return response()->header("HTTP/1.1 404 Bad Request")->json(["message" => "Route / method not found."]);
+    return @response()->header("HTTP/1.1 404 Bad Request")->json(["message" => "Route / method not found."]);
 })->setMatch("//is");
