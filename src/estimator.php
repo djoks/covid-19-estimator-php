@@ -33,7 +33,7 @@ function covid19ImpactEstimator($data)
   } else if ($data["periodType"] == "weeks" || $data["periodType"] == "week") {
     $daysBetween = $data["timeToElapse"] * 7;
   } else if ($data["periodType"] == "months" || $data["periodType"] == "month") {
-    $daysBetween = $data["timeToElapse"] * 31;
+    $daysBetween = $data["timeToElapse"] * 30;
   }
 
   $impact = new Impact();
