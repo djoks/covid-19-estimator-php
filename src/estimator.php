@@ -21,7 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    return json_encode($errors);
+    return response()->json($errors);
   }
 
   $currentDate = Carbon::now();
