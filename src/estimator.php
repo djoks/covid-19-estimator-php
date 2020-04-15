@@ -58,7 +58,7 @@ function covid19ImpactEstimator($data)
       "data" => $data->toArray(),
       "impact" => $impact->toArray(),
       "severeImpact" => $severeImpact->toArray()
-    ]);
+    ], "covid19estimator");
   } else {
     return response()->json([
       "data" => $data,
