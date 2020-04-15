@@ -219,5 +219,5 @@ function logRequest()
     $log = new Logger("Estimator");
     $log->pushHandler($stream);
 
-    $log->info(strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000000) . "ms\n\n");
+    $log->info(strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000000) . "ms");
 }
