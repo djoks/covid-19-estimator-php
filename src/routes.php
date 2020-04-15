@@ -1,5 +1,4 @@
 <?php
-ob_start();
 
 require "estimator.php";
 
@@ -19,8 +18,5 @@ Router::get("/api/v1/on-covid-19/logs", function () {
 });
 
 Router::all("", function () {
-    if (!headers_sent()) header('X-PHP-Response-Code: 404', true, 404);
-    return response()->json(["message" => "Route / method not found."]);
+    return response()->header("HTTP/1.1 404 Bad Request")->json(["message" => "Route / method not found."]);
 })->setMatch("//is");
-
-ob_end_flush();

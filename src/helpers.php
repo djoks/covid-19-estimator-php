@@ -1,5 +1,4 @@
 <?php
-ob_start();
 
 use Carbon\Carbon;
 use Monolog\Formatter\LineFormatter;
@@ -222,5 +221,3 @@ function logRequest()
 
     $log->info(Carbon::now()->timestamp . "\t\t" . request()->getUrl() . "\t\tDone in " . number_format(microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"], 2) . " seconds\n\n");
 }
-
-ob_end_flush();

@@ -1,5 +1,4 @@
 <?php
-ob_start();
 
 require "vendor/autoload.php";
 require "src/helpers.php";
@@ -22,8 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    if (!headers_sent()) header('X-PHP-Response-Code: 422', true, 422);
-    return response()->json([
+    return response()->header("HTTP/1.1 400 Bad Request")->json([
       "errors" => $errors
     ]);
   }
@@ -69,5 +67,3 @@ function covid19ImpactEstimator($data)
     ]);
   }
 }
-
-ob_end_flush();
