@@ -21,8 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    http_response_code(400);
-    return response()->json(["errors" => $errors]);
+    return [$errors];
   }
 
   $currentDate = Carbon::now();
@@ -52,17 +51,17 @@ function covid19ImpactEstimator($data)
 
   if (stripos(request()->getUrl(), "/xml") !== false) {
     $data = new Data($data);
-    header('Content-Type: application/xml');
+
     return ArrayToXml::convert([
       "data" => $data->toArray(),
       "impact" => $impact->toArray(),
       "severeImpact" => $severeImpact->toArray()
     ], "covid19estimator");
   } else {
-    return response()->json([
+    return [
       "data" => $data,
       "impact" => $impact,
       "severeImpact" => $severeImpact
-    ]);
+    ];
   }
 }
