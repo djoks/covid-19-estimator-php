@@ -1,6 +1,7 @@
 <?php
 
 require "vendor/autoload.php";
+require_once "src/helpers.php";
 require "objects.php";
 
 use Carbon\Carbon;
