@@ -5,13 +5,13 @@ require "estimator.php";
 use Pecee\SimpleRouter\SimpleRouter as Router;
 
 Router::post("/api/v1/on-covid-19", function () {
-    $response = covid19ImpactEstimator(getInputAsJson());
+    $response = covid19ImpactEstimator(input()->all());
     header('Content-Type: application/json');
     return json_encode($response);
 });
 
 Router::post("/api/v1/on-covid-19/xml", function () {
-    $response = covid19ImpactEstimator(getInputAsJson());
+    $response = covid19ImpactEstimator(input()->all());
     header('Content-Type: application/xml');
     return $response;
 });
