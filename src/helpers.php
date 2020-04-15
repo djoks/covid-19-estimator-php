@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Monolog\Formatter\LineFormatter;
+use Monolog\Formatter\NormalizerFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Pecee\SimpleRouter\SimpleRouter as Router;
