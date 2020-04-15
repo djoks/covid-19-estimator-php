@@ -60,8 +60,8 @@ function covid19ImpactEstimator($data)
   } else {
     return [
       "data" => $data,
-      "impact" => $impact,
-      "severeImpact" => $severeImpact
+      "impact" => $impact->toArray(),
+      "severeImpact" => $severeImpact->toArray()
     ];
   }
 }

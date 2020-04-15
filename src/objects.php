@@ -26,14 +26,14 @@ class Data
 
     function toArray()
     {
-        return [
+        return array(
             "region" => $this->region->toArray(),
             "periodType" => (string) $this->periodType,
             "timeToElapse" => (string) $this->timeToElapse,
             "reportedCases" => (string) $this->reportedCases,
             "population" => (string) $this->population,
             "totalHospitalBeds" => (string) $this->totalHospitalBeds,
-        ];
+        );
     }
 }
 
@@ -57,7 +57,7 @@ class Impact
 
     function toArray()
     {
-        return [
+        return array(
             "currentlyInfected" => (string) $this->currentlyInfected,
             "infectionsByRequestedTime" => (string) $this->infectionsByRequestedTime,
             "severeCasesByRequestedTime" => (string) $this->severeCasesByRequestedTime,
@@ -65,7 +65,7 @@ class Impact
             "casesForICUByRequestedTime" => (string) $this->casesForICUByRequestedTime,
             "casesForVentilatorsByRequestedTime" => (string) $this->casesForVentilatorsByRequestedTime,
             "dollarsInFlight" => (string) $this->dollarsInFlight,
-        ];
+        );
     }
 }
 
@@ -95,11 +95,11 @@ class Region
 
     function toArray()
     {
-        return [
+        return array(
             "name" => $this->name,
             "avgAge" => (string) $this->avgAge,
             "avgDailyIncomeInUSD" => (string) $this->avgDailyIncomeInUSD,
             "avgDailyIncomePopulation" => (string) $this->avgDailyIncomePopulation,
-        ];
+        );
     }
 }
