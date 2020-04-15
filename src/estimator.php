@@ -56,19 +56,19 @@ function covid19ImpactEstimator($data)
 
   logRequest();
 
-  if (stripos(request()->getUrl(), "/xml") !== false) {
-    $data = new Data($data);
+  $data = new Data($data);
 
+  if (stripos(request()->getUrl(), "/xml") !== false) {
     return ArrayToXml::convert([
-      "data" => $data->toArray(),
-      "impact" => $impact->toArray(),
-      "severeImpact" => $severeImpact->toArray()
+      "data" => $data->toStringArray(),
+      "impact" => $impact->toStringArray(),
+      "severeImpact" => $severeImpact->toStringArray()
     ], "covid19estimator");
   } else {
     return [
-      "data" => $data,
-      "impact" => $impact->toArray(),
-      "severeImpact" => $severeImpact->toArray()
+      "data" => $data->toJsonArray(),
+      "impact" => $impact->toJsonArray(),
+      "severeImpact" => $severeImpact->toJsonArray()
     ];
   }
 }
