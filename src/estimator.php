@@ -23,7 +23,7 @@ function covid19ImpactEstimator($data)
   if (!empty($errors)) {
     return [$errors];
   }*/
-
+  $test = "";
   $currentDate = Carbon::now();
   $endDate = Carbon::parse($data["timeToElapse"] . " " . $data["periodType"]);
   $daysBetween = $currentDate->diffInDays($endDate);
