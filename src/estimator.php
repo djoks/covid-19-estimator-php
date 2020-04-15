@@ -21,8 +21,7 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    @http_response_code(400);
-    return @response()->json([
+    return json_encode([
       "errors" => $errors
     ]);
   }
@@ -54,7 +53,6 @@ function covid19ImpactEstimator($data)
 
   if (stripos(request()->getUrl(), "/xml") !== false) {
     $data = new Data($data);
-    if (!headers_sent()) @header('Content-Type:application/xml');
     return ArrayToXml::convert([
       "data" => $data->toArray(),
       "impact" => $impact->toArray(),
