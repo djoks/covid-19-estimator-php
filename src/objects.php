@@ -24,15 +24,27 @@ class Data
         $this->totalHospitalBeds = $data["totalHospitalBeds"];
     }
 
-    function toArray()
+    function toStringArray()
     {
         return array(
-            "region" => $this->region->toArray(),
+            "region" => $this->region->toStringArray(),
             "periodType" => (string) $this->periodType,
             "timeToElapse" => (string) $this->timeToElapse,
             "reportedCases" => (string) $this->reportedCases,
             "population" => (string) $this->population,
             "totalHospitalBeds" => (string) $this->totalHospitalBeds,
+        );
+    }
+
+    function toJsonArray()
+    {
+        return array(
+            "region" => $this->region->toJsonArray(),
+            "periodType" => $this->periodType,
+            "timeToElapse" =>  $this->timeToElapse,
+            "reportedCases" => $this->reportedCases,
+            "population" => $this->population,
+            "totalHospitalBeds" => $this->totalHospitalBeds,
         );
     }
 }
@@ -55,7 +67,7 @@ class Impact
 
     public $dollarsInFlight;
 
-    function toArray()
+    function toStringArray()
     {
         return array(
             "currentlyInfected" => (string) $this->currentlyInfected,
@@ -65,6 +77,19 @@ class Impact
             "casesForICUByRequestedTime" => (string) $this->casesForICUByRequestedTime,
             "casesForVentilatorsByRequestedTime" => (string) $this->casesForVentilatorsByRequestedTime,
             "dollarsInFlight" => (string) $this->dollarsInFlight,
+        );
+    }
+
+    function toJsonArray()
+    {
+        return array(
+            "currentlyInfected" => $this->currentlyInfected,
+            "infectionsByRequestedTime" => $this->infectionsByRequestedTime,
+            "severeCasesByRequestedTime" => $this->severeCasesByRequestedTime,
+            "hospitalBedsByRequestedTime" => $this->hospitalBedsByRequestedTime,
+            "casesForICUByRequestedTime" => $this->casesForICUByRequestedTime,
+            "casesForVentilatorsByRequestedTime" => $this->casesForVentilatorsByRequestedTime,
+            "dollarsInFlight" => $this->dollarsInFlight,
         );
     }
 }
@@ -93,13 +118,23 @@ class Region
         $this->avgDailyIncomePopulation = $region["avgDailyIncomePopulation"];
     }
 
-    function toArray()
+    function toStringArray()
     {
         return array(
             "name" => $this->name,
             "avgAge" => (string) $this->avgAge,
             "avgDailyIncomeInUSD" => (string) $this->avgDailyIncomeInUSD,
             "avgDailyIncomePopulation" => (string) $this->avgDailyIncomePopulation,
+        );
+    }
+
+    function toJsonArray()
+    {
+        return array(
+            "name" => $this->name,
+            "avgAge" => $this->avgAge,
+            "avgDailyIncomeInUSD" => $this->avgDailyIncomeInUSD,
+            "avgDailyIncomePopulation" => $this->avgDailyIncomePopulation,
         );
     }
 }
