@@ -10,6 +10,12 @@ Router::post("/api/v1/on-covid-19", function () {
     return json_encode($response);
 });
 
+Router::post("/api/v1/on-covid-19/json", function () {
+    $response = covid19ImpactEstimator(input()->all());
+    header('Content-Type: application/json');
+    return json_encode($response);
+});
+
 Router::post("/api/v1/on-covid-19/xml", function () {
     $response = covid19ImpactEstimator(input()->all());
     header('Content-Type: application/xml');
