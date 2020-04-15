@@ -21,7 +21,8 @@ function covid19ImpactEstimator($data)
   $errors = validate($data);
 
   if (!empty($errors)) {
-    return response()->header("HTTP/1.1 400 Bad Request")->json([
+    http_response_code(400);
+    return response()->json([
       "errors" => $errors
     ]);
   }
