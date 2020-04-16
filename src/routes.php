@@ -29,7 +29,8 @@ Router::get("/api/v1/on-covid-19/logs", function () {
     header('Content-Type: text/plain');
     //header('Content-Disposition: attachment;filename="covid19estimator.log"');
     logRequest();
-    return rtrim(file_get_contents(__DIR__ . "/../logs/estimator.log"));
+    $file = file_get_contents(__DIR__ . "/../logs/estimator.log");
+    return str_replace("\s", "ms", rtrim($file));
 });
 
 Router::get("/logs", function () {
