@@ -26,18 +26,17 @@ Router::post("/api/v1/on-covid-19/xml", function () {
 });
 
 Router::get("/api/v1/on-covid-19/logs", function () {
-    header('Content-Type: text/plain');
-    //header('Content-Disposition: attachment;filename="covid19estimator.log"');
-    logRequest();
     $file = file_get_contents(__DIR__ . "/../logs/estimator.log");
-    return str_replace("\s", "ms", rtrim($file));
+    logRequest();
+    header('Content-Type: text/plain');
+    return rtrim($file);
 });
 
 Router::get("/logs", function () {
-    header('Content-Type: text/plain');
-    header('Content-Disposition: attachment;filename="covid19estimator.log"');
+    $file = file_get_contents(__DIR__ . "/../logs/estimator.log");
     logRequest();
-    return rtrim(file_get_contents(__DIR__ . "/../logs/estimator.log"));
+    header('Content-Type: text/plain');
+    return rtrim($file);
 });
 
 Router::all("", function () {

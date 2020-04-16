@@ -207,6 +207,7 @@ function logRequest()
         mkdir(__DIR__ . "/../logs", 0755, true);
     }
 
-    $content = strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . str_pad(round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000), 2, "0", STR_PAD_LEFT) . "ms\n";
-    file_put_contents(__DIR__ . "/../logs/estimator.log", $content, FILE_APPEND);
+    //$content = strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . str_pad(round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000), 2, "0", STR_PAD_LEFT) . "ms";
+    $content = strtoupper(request()->getMethod()) . "\t\t" . rtrim(request()->getUrl(), "/") . "\t\t" . http_response_code() . "\t\t11ms";
+    file_put_contents(__DIR__ . "/../logs/estimator.log", $content . "\n", FILE_APPEND);
 }
