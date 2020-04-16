@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Monolog\Formatter\LineFormatter;
+use Monolog\Formatter\NormalizerFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Pecee\SimpleRouter\SimpleRouter as Router;
@@ -200,24 +201,12 @@ function validate($data)
     return $errors;
 }
 
-/**
- * Log request execution time to file
- */
 function logRequest()
 {
-    // the default date format is "Y-m-d\TH:i:sP"
-    $dateFormat = "Y-m-d\TH:i:sP";
-    // the default output format is "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n"
-    $output = "%message%\n";
-    // finally, create a formatter
-    $formatter = new LineFormatter($output, $dateFormat);
+    if (!file_exists(__DIR__ . "/../logs")) {
+        mkdir(__DIR__ . "/../logs", 0755, true);
+    }
 
-    // Create a handler
-    $stream = new StreamHandler("logs/estimator.log", Logger::DEBUG);
-    $stream->setFormatter($formatter);
-
-    $log = new Logger("Estimator");
-    $log->pushHandler($stream);
-
-    $log->info(strtoupper(request()->getMethod()) . "\t\t" . request()->getUrl() . "\t\t" . http_response_code() . "\t\t" . str_pad(round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000), 2, "0", STR_PAD_LEFT) . "ms");
+    $content = strtoupper(request()->getMethod()) . "\t" . "\t" . rtrim(request()->getUrl(), "/") . "\t" . "\t" . http_response_code() . "\t" . "\t" . str_pad(round((microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000), 2, "0", STR_PAD_LEFT) . "ms";
+    file_put_contents(__DIR__ . "/../logs/estimator.log", $content . "\n", FILE_APPEND);
 }
