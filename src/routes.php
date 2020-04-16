@@ -34,13 +34,13 @@ Router::get("/api/v1/on-covid-19/logs", function () {
 
 Router::get("/logs", function () {
     $file = file_get_contents(__DIR__ . "/../logs/estimator.log");
-    logRequest();
+    //logRequest();
     header('Content-Type: text/plain');
     return rtrim($file);
 });
 
 Router::all("", function () {
     http_response_code(404);
-    logRequest();
+    //logRequest();
     return json_encode(["message" => "Route / method not found."]);
 })->setMatch("//is");
